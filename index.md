@@ -53,7 +53,7 @@ Other people are out there doing things. What did they do? Was it good? Was it b
 
 How did you decide to solve the problem? What network architecture did you use? What data? Lots of details here about all the things you did. This section describes almost your whole project.
 
-# Data set
+### Data set
 
 Figures are good here. Maybe you present your network architecture or show some example data points?
 
