@@ -26,6 +26,13 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
+|POS|avg score|avg length|W|E|
+|---|---|---|---|---|
+|adj|0.39|5.7|0.45|0.16|
+|noun|0.30|10.1|0.52|0.10|
+|adv|0.32|7.2|0.60|0.20|
+|verb|0.31|5.9|0.58|0.17
+
 # Example Project
 
 Write a 3-4 sentence abstract. It should introduce the problem and your approach. You may also want some numbers like 35 mAP and 78% accuracy. You can use this example README for your project, you can use a different ordering for your website, or you can make a totally different website altogether!
