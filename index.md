@@ -57,7 +57,7 @@ How did you decide to solve the problem? What network architecture did you use? 
 
 ### Data
 
-For this project, a private data set compiled by Evidation Health, a digital health company, as a part of the Homekit2020 flu study was used. Some fast facts about the study cohort can be found below: 
+For this project, a private data set compiled by Evidation Health, a digital health company, as a part of the Homekit2020 flu study was used. Some fast facts about the study cohort can be found below:
 
 - Around 5200 participants
 - Age 18 years or older
@@ -66,6 +66,40 @@ For this project, a private data set compiled by Evidation Health, a digital hea
 - Willing to complete daily surveys on the mobile app
 - Followed for 4 months, January - May 2020
 
+Study participants were follow through the flu season of 2020 and after enrolling in the study, were provided with at home flu test kits. They were told to use the kits soon as they were instructed to do so by the study app, the main interface in the whole study with which the participants interact. The study procedure was roughly as following:
+
+1) Baseline questionnaire at the beginning
+2) Home test kits delivered to participants
+3) Daily one question survey through mobile app
+4) If participant has symptoms, more survey questions
+5) A certain combination of symptoms (e.g. has cough and muscle ache) trigger test kit
+6) Tests sent to lab for diagnosis
+
+For each participant, four different sources of data were available:
+
+- Baseline Questionnaire (baselines)
+- Daily Surveys (survey data)
+- Fitbit data (activity data)
+- Lab results
+
+Baseline Questionnaire, referred to as baselines from here on, included demographic information, medical history, drug usage history as well as some lifestyle and wellbeing questions that participants respond to at the beginning of the study.
+
+Daily survey, referred to as survey data from here on, normally consist of a single question that inquiring whether the participant had any ILI symptoms in the past 24 hours. If the answer is yes, more questions follow soliciting information about the nature of symptoms, medication usage if any and some quality of life questions.
+
+Fitbit data, referred to as activity data from here on, includes heart rate data, sleep related features (nap count, minutes in bed, minutes of light sleep vs deep sleep etc.), physical activity related features (step counts, calories burned, minutes of intense physical activity etc.)
+
+Lab results indicate whether a self-administered test kit is flu positive. Three different ILIs, namely Flu A, Flu B and RSV, constitute the definition of flu positive in this project. The actual date of diagnosis was selected as the date corresponding test kit was triggered.
+
+### Prediction task and training setup
+
+The prediction task was formulated as a binary classification task where a flu diagnosis would be predicted for each day during the flu season, given baselines, survey data and activity data. Beyond their date of diagnosis, flu positive participants were excluded from the rest of the training procedure. To classify each day, a fixed time window of n days were used (e.g. data from Monday to Friday was used to for a given participant to predict if the participant would receive diagnosis on Friday).
+
+A prospective training scheme was used to train models under a more realistic framework which mimic a potential deployment setting. To this end, the data was split temporally into two parts:
+
+- Observation Phase (training)
+- Deployment Phase (validation and testing)
+
+During the observation phase, which include all data for the first t weeks of the study period, the models were first trained on randomly cropped time windows, the aforementioned n day windows. Subsequently, the deployment phase includes all data beyond the first t weeks of the study period and models make daily predictions while progressing through this phase. In other words, the model first predicts a flu positivity on day d, then uses that day to train further before repeating the same procedure with day d+1 and so on, following a 'train and advance' approach. In this way, future data is never made available to the model similar to a realistic setting where a deployed model could only use previous days' data. The timeline used to split data set into observation and deployment, i.e. train, validation and test, is illustrated below:
 
 ## Results
 
