@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## FluShot: Predicting flu onset using data from wearable devices
 
 You can use the [editor on GitHub](https://github.com/melihyilmaz/CSE490G1_FinalProject/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
