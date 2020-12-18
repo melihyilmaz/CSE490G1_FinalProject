@@ -55,9 +55,17 @@ Inspired by such previous work, this project seeks to validate the usefulness of
 
 How did you decide to solve the problem? What network architecture did you use? What data? Lots of details here about all the things you did. This section describes almost your whole project.
 
-### Data set
+### Data
 
-Figures are good here. Maybe you present your network architecture or show some example data points?
+For this project, a private data set compiled by Evidation Health, a digital health company, as a part of the Homekit2020 flu study was used. Some fast facts about the study cohort can be found below: 
+
+- Around 5200 participants
+- Age 18 years or older
+- US residents
+- Own wearable Fitbit
+- Willing to complete daily surveys on the mobile app
+- Followed for 4 months, January - May 2020
+
 
 ## Results
 
