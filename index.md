@@ -117,6 +117,19 @@ Two different network architectures were employed as feature extractors the expe
 
 Model 3 closely resembles model 2 in terms of its feature extractors but, instead of an XGBoost, features two fully connected layers as the end classifier which allow for the end-to-end training of the whole framework. Similar to what happens in model 2, feature extractors are first separately trained (this step can be called pre-training). Later, both feature extractors and the end classifier are trained in an end-to-end manner where updates are propagated all the way from the end to the beginning (this step can be called fine-tuning).
 
+### Preprocessing and hyper-parameters
+
+Below steps were taken to preprocess the data:
+
+- Categorical features were one-hot encoded
+- Missing days in the activity data were imputed, separate binary features were added to encode missingness (e.g. missing_heartrate = 1 if heart rate missing, otherwise 0)
+- Days of the week were cyclically encoded with help of sine and cosine functions, i.e. ensuring that representation of Monday followed Sunday.
+- Time windows for which a third of days are missing (e.g. 3 days missing when time window size = 9) are discarded
+- Data was standardized prior to training. Mean and variance parameters of the training data were used to scale validation and test data.
+- Principal Component Analysis (PCA) was applied to the baseline data where resulting features explained 0.95 of variance in the Data
+
+Window size (# of days) was treated as a hyper-parameter and a set of values [5, 10, 15, 20, 30] were experimented with. To tackle the class imbalance in the data set (flu positive time windows constituted less than 1% of the entire data set), class weights inversely related to class frequency were used during modeling, helping the model calculate a greater loss for misclassifications of the minority class. Architecture of the feature extractors was also treated as a hyper parameter (CNN vs LSTM). Learned representations were of fixed size 128 in both cases (the number was obtained with hyper-parameter search). Binary cross entropy was used as the loss function befitting binary classification and Adam was the optimizer of choice. ReLU activations were used with convolutional layers. For XGBoost, the number of estimators and maximum tree depth was found with hyper-parameter search and the results section only indicate the best performance obtained. Feature extractors were initially trained for 100 epochs with early stopping in case validation loss (0.15 of the training data was held out, not to be confused with deployment phase data) stopped increasing for a consecutive 5 epochs. A batch size of 32 was used. 
+
 ## Results
 
 How did you evaluate your approach? How well did you do? What are you comparing to? Maybe you want ablation studies or comparisons of different methods.
