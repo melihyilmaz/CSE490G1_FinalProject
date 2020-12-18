@@ -101,6 +101,22 @@ A prospective training scheme was used to train models under a more realistic fr
 
 During the observation phase, which include all data for the first t weeks of the study period, the models were first trained on randomly cropped time windows, the aforementioned n day windows. Subsequently, the deployment phase includes all data beyond the first t weeks of the study period and models make daily predictions while progressing through this phase. In other words, the model first predicts a flu positivity on day d, then uses that day to train further before repeating the same procedure with day d+1 and so on, following a 'train and advance' approach. In this way, future data is never made available to the model similar to a realistic setting where a deployed model could only use previous days' data. The timeline used to split data set into observation and deployment, i.e. train, validation and test, is illustrated below:
 
+figure here!!! mention that a portion of deployment was used as validation.
+
+### Models
+
+Three different modeling, of increasing complexity, were employed, here on referred to as model 1, 2 and 3.
+
+Model 1 consists of a single machine learning classifier, namely an XGBoost, which predicts the label for a given time window. Baselines, survey data and activity data are all concatenated and subsequently passed to the model. Model 1 acts as a simple baseline which doesn't exploit the temporal relationship in the time series data.
+
+Model 2 consists of 2 neural networks serving as feature extractors for survey and activity data respectively, as well as an XGBoost end classifier. Instead of feeding the time series data straight to the end classifier, this approach focuses on learning neural representations from them, which would condense their predictive potential while exploiting the relationships among features. The proxy task used to learn representations of both survey and activity data is the main task itself, i.e. predicting the flu diagnosis at the end of a given time window. Feature extractors, one using only survey data and the other only activity data, are trained for this task and the output of the penultimate layer of these neural nets are passed on to the end classifier. Representations survey data, activity data and baselines are concatenated before being fed to the end classifier. Ultimately, the end classifier predicts the label of the given time window.
+
+figure here
+
+Two different network architectures were employed as feature extractors the experiments. Firstly, a one dimensional convolutional neural network (1-D CNN), also called a temporal CNN, was used. Consisting of 3 1-D convolutional layers and a final fully connected layer, where batch normalization is applied following each convolutional layer and dropout right before the fully connected. Secondly, a recurrent neural network (RNN) based architecture featuring a bi-directional LSTM and a subsequent fully connected layer was used. In both cases, the input of fully connected layers, i.e. the output of the penultimate layer, were used taken to be learned representations. Selecting these architectures for feature extractors allowed the model to learn temporal dependencies among the time series data.
+
+Model 3 closely resembles model 2 in terms of its feature extractors but, instead of an XGBoost, features two fully connected layers as the end classifier which allow for the end-to-end training of the whole framework. Similar to what happens in model 2, feature extractors are first separately trained (this step can be called pre-training). Later, both feature extractors and the end classifier are trained in an end-to-end manner where updates are propagated all the way from the end to the beginning (this step can be called fine-tuning).
+
 ## Results
 
 How did you evaluate your approach? How well did you do? What are you comparing to? Maybe you want ablation studies or comparisons of different methods.
