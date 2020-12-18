@@ -41,9 +41,9 @@ VIDEO GOES HERE (probably): Record a 2-3 minute long video presenting your work.
 
 ## Introduction
 
-In this section the problem you are working on. Maybe talk about why you thought it was interesting. Or why you think it needs to get solved.
+In a year of global pandemic, data driven to methods for prevention of infectious diseases have been under the spotlight. In this context, 'track & trace' technologies have justifiably received a lot of attention as they promise to contain outbreaks by tracing chains of infections to identify spreaders and individuals under risk. Taking a step further, accurate predictive models would be able to spot and help isolate individuals who are infected without a clinical diagnosis, hence stopping chains of infections right on their track even before they start to accelerate.
 
-You may also want to say a little bit here about what you did. Not too much though. Don't give the whole game away.
+Accordingly, this project was motivated by the task of making daily predictions regarding influenza onset for a cohort of flu study participants using a mixture of demographic data, medical history, daily surveys and activity data derived from Fitbit smart watches. As will be described in sections below, this involved a) defining a realistic and meaningful prediction task which would mimic the conditions under which a real-time flu prediction framework could potentially operate, b) comparing how traditional machine learning methods performed against neural network based approaches for the task at hand and c) effect of different hyper parameters and also different data modalities to the overall performance. 
 
 ## Related Work
 
