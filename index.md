@@ -138,4 +138,16 @@ You may want some qualitative results and quantitative results. Example images/t
 
 ## Discussion
 
-You can talk about your results and the stuff you've learned here if you want. Or discuss other things. Really whatever you want, it's your project.
+The project essentially accomplishes what it has set out to do, mainly achieving superior performance compared to non-neural baselines and demonstrating the usefulness of wearable data, but there's certainly a lot of room for improvement. The immense class imbalance in the data has been a formidable challenge and methods other than class weighting can be employed to alleviate it. Also, a better understanding of the precision/recall trade-off, made more pressing by the imbalance, is necessary as medical applications are usually more sensitive to model behavior in that regard (e.g. higher recall for flu positivity might be desired at the expense of lower precision). 
+
+On the other hand, formulating a better proxy task with which feature extractors would trained makes for important future work. The main task itself passes as an acceptable proxy task but interactions between different features remain unexploited. Using what is called a self-supervised training scheme, some inherent relations within features can be used in the absence of labels. For example, recent work has used the self-supervised task of predicting heart rate from step counts to learn representations of activity data, which day later use predict different outcomes [4]. A similar, or even more creative, proxy task could enrich the learned neural representations for the main task of flu prediction.
+
+## References
+
+[1]
+
+[2]
+
+[3]
+
+[4]
