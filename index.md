@@ -100,7 +100,7 @@ A prospective training scheme was used to train models under a more realistic fr
 
 During the observation phase, which include all data for the first t weeks of the study period, the models were first trained on randomly cropped time windows, the aforementioned n day windows. Subsequently, the deployment phase includes all data beyond the first t weeks of the study period and models make daily predictions while progressing through this phase. In other words, the model first predicts a flu positivity on day d, then uses that day to train further before repeating the same procedure with day d+1 and so on, following a 'train and advance' approach. In this way, future data is never made available to the model similar to a realistic setting where a deployed model could only use previous days' data. Also, the first 2 weeks of the deployment phase were used for validation and hyper-parameter selection, whereas the rest was only used at test time. The timeline used to split data set into observation and deployment, i.e. train, validation and test, is illustrated below:
 
-![Image]("https://github.com/melihyilmaz/CSE490G1_FinalProject/blob/gh-pages/data_timeline.png")
+![data_timeline](https://github.com/melihyilmaz/CSE490G1_FinalProject/blob/gh-pages/data_timeline.png)
 
 
 ### Models
