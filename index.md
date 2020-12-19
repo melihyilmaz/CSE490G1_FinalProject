@@ -26,18 +26,16 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
-|POS|avg score|avg length|W|E|
-|---|---|---|---|---|
-|adj|0.39|5.7|0.45|0.16|
-|noun|0.30|10.1|0.52|0.10|
-|adv|0.32|7.2|0.60|0.20|
-|verb|0.31|5.9|0.58|0.17
-
 # Example Project
 
 **Absract:** Write a 3-4 sentence abstract. It should introduce the problem and your approach. You may also want some numbers like 35 mAP and 78% accuracy. You can use this example README for your project, you can use a different ordering for your website, or you can make a totally different website altogether!
 
-VIDEO GOES HERE (probably): Record a 2-3 minute long video presenting your work. One option - take all your figures/example images/charts that you made for your website and put them in a slide deck, then record the video over zoom or some other recording platform (screen record using Quicktime on Mac OS works well). The video doesn't have to be particularly well produced or anything.
+VIDEO GOES HERE 
+
+
+
+
+
 
 ## Introduction
 
@@ -47,7 +45,7 @@ Accordingly, this project was motivated by the task of making daily predictions 
 
 ## Related Work
 
-Data derived from wearable devices, especially markers such as heart rate, sleep status and step count, has recently gained more traction as potential predictors of influenza like illness (ILI) onset. On a population level, weekly variations in wearable data were shown to correspond to ILI rates for the same population [1]. Although largely correlational and lacking the individual level resolution that would deliver actionable predictions, this work demonstrates the potential of wearable data for influenza surveillance. Similar work focusing on individual level predictions for COVID-19 symptoms and COVID-19 related hospitalizations has leveraged neural networks to model wearable device data and demonstrated that heart rate, as well as respiration rate, as measured by Fitbit devices were elevated with disease onset[2]. Another very recent paper using wearable data for ILI symptom prediction, involving both influenza and COVID-19, employed both neural nets and traditional machine learning modeling but most importantly highlighted the importance of defining a realistic learning task and setting by demonstrating the difference in performance between retrospective and prospective training schemes [3].
+Data derived from wearable devices, especially markers such as heart rate, sleep status and step count, has recently gained more traction as potential predictors of influenza like illness (ILI) onset. On a population level, weekly variations in wearable data were shown to correspond to ILI rates for the same population [[1(https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)]]. Although largely correlational and lacking the individual level resolution that would deliver actionable predictions, this work demonstrates the potential of wearable data for influenza surveillance. Similar work focusing on individual level predictions for COVID-19 symptoms and COVID-19 related hospitalizations has leveraged neural networks to model wearable device data and demonstrated that heart rate, as well as respiration rate, as measured by Fitbit devices were elevated with disease onset[[2(https://www.nature.com/articles/s41746-020-00363-7)]]. Another very recent paper using wearable data for ILI symptom prediction, involving both influenza and COVID-19, employed both neural nets and traditional machine learning modeling but most importantly highlighted the importance of defining a realistic learning task and setting by demonstrating the difference in performance between retrospective and prospective training schemes [3].
 
 Inspired by such previous work, this project seeks to validate the usefulness of wearable data, as measured by the performance boost it provides for prediction of ILI related outcomes , while maintaining a realistic, and potentially deployable, modeling framework.
 
@@ -110,7 +108,7 @@ Model 1 consists of a single machine learning classifier, namely an XGBoost, whi
 
 Model 2 consists of 2 neural networks serving as feature extractors for survey and activity data respectively, as well as an XGBoost end classifier. Instead of feeding the time series data straight to the end classifier, this approach focuses on learning fixed length neural representations from them, which would condense their predictive potential while exploiting the relationships among features. The proxy task used to learn representations of both survey and activity data is the main task itself, i.e. predicting the flu diagnosis at the end of a given time window. Feature extractors, one using only survey data and the other only activity data, are trained for this task and the output of the penultimate layer of these neural nets are passed on to the end classifier. Representations survey data, activity data and baselines are concatenated before being fed to the end classifier. Ultimately, the end classifier predicts the label of the given time window.
 
-figure here
+figure here!!!
 
 Two different network architectures were employed as feature extractors the experiments. Firstly, a one dimensional convolutional neural network (1-D CNN), also called a temporal CNN, was used. Consisting of 3 1-D convolutional layers and a final fully connected layer, where batch normalization is applied following each convolutional layer and dropout right before the fully connected. Secondly, a recurrent neural network (RNN) based architecture featuring a bi-directional LSTM and a subsequent fully connected layer was used. In both cases, the input of fully connected layers, i.e. the output of the penultimate layer, were used taken to be learned representations. Selecting these architectures for feature extractors allowed the model to learn temporal dependencies among the time series data.
 
@@ -175,9 +173,9 @@ On the other hand, formulating a better proxy task with which feature extractors
 
 ## References
 
-[1]
+[[1(https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)]] 
 
-[2]
+[[2(https://www.nature.com/articles/s41746-020-00363-7)]]
 
 [3]
 
