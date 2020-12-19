@@ -1,6 +1,6 @@
 ## FluShot: Predicting flu onset using data from wearable devices
 
-**Absract:** Write a 3-4 sentence abstract. It should introduce the problem and your approach. You may also want some numbers like 35 mAP and 78% accuracy. You can use this example README for your project, you can use a different ordering for your website, or you can make a totally different website altogether!
+**Absract:** This project was aimed at exploring the usefulness of wearable device data and their neural representations in predicting influenza onset. A mixture of demographic data, medical history, daily surveys and activity data derived from smart watches was used to make predictions on whether someone would receive a flu diagnosis on any given day of the 2020 flu season. Using an LSTM based architecture to learn time series representations and end-to-end training to optimize the entire framework, an AUROC of 0.953 and F-1 score of 0.513 were attained in the heavily imbalanced data set. Wearable device data was shown to enhance the predictive performance of model.
 
 [PROJECT VIDEO](https://drive.google.com/drive/folders/1peh_0dNibL9ziWJkzX4oK5BzMr4GiCE8?usp=sharing)
 
@@ -108,7 +108,7 @@ Binary cross entropy was used as the loss function befitting binary classificati
 
 Results for different models can be found below (window size = 15, positive class is flu diagnosis):
 
-|Model name|AUC|Precision|Recall|F-1 Score|
+|Model name|AUROC|Precision|Recall|F-1 Score|
 |---|---|---|---|---|
 |Model 1 (XGBoost)|0.729|0.317|0.425|0.363|
 |Model 2 (w/ CNN)|0.883|0.379|0.501|0.431|
@@ -120,7 +120,7 @@ As seen above, model 3 which leverages both representation learning and end-to-e
 
 Results for different input data can be found below (model 3 with LSTM was used in all instances):
 
-|Input data|AUC|Precision|Recall|F-1 Score|
+|Input data|AUROC|Precision|Recall|F-1 Score|
 |---|---|---|---|---|
 |Baselines+Survey|0.875|0.368|0.492|0.421|
 |Baselines+Survey+Activity|0.953|0.462|0.579|0.513|
@@ -129,7 +129,7 @@ Addressing the question regarding usefulness of wearable data raised earlier, th
 
 Results for experiments with different window sizes can be found below (model 3 with LSTM was used in all instances):
 
-|Window size (# of days)|AUC|Precision|Recall|F-1 Score|
+|Window size (# of days)|AUROC|Precision|Recall|F-1 Score|
 |---|---|---|---|---|
 |5|0.857|0.358|0.471|0.407|
 |10|0.932|0.436|0.548|0.486||
