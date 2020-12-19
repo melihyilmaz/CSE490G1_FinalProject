@@ -43,17 +43,15 @@ VIDEO GOES HERE (probably): Record a 2-3 minute long video presenting your work.
 
 In a year of global pandemic, data driven to methods for prevention of infectious diseases have been under the spotlight. In this context, 'track & trace' technologies have justifiably received a lot of attention as they promise to contain outbreaks by tracing chains of infections to identify spreaders and individuals under risk. Taking a step further, accurate predictive models would be able to spot and help isolate individuals who are infected without a clinical diagnosis, hence stopping chains of infections right on their track even before they start to accelerate.
 
-Accordingly, this project was motivated by the task of making daily predictions regarding influenza onset for a cohort of flu study participants using a mixture of demographic data, medical history, daily surveys and activity data derived from Fitbit smart watches. As will be described in sections below, this involved a) defining a realistic and meaningful prediction task which would mimic the conditions under which a real-time flu prediction framework could potentially operate, b) comparing how traditional machine learning methods performed against neural network based approaches for the task at hand and c) effect of different hyper parameters and also different data modalities to the overall performance. 
+Accordingly, this project was motivated by the task of making daily predictions regarding influenza onset for a cohort of flu study participants using a mixture of demographic data, medical history, daily surveys and activity data derived from Fitbit smartwatches. As will be described in sections below, this involved a) defining a realistic and meaningful prediction task which would mimic the conditions under which a real-time flu prediction framework could potentially operate, b) comparing how traditional machine learning methods performed against neural network based approaches for the task at hand and c) effect of different hyper parameters and also different data modalities to the overall performance.
 
 ## Related Work
 
-Data derived from wearable devices, especially markers such as heart rate, sleep status and step count, has recently gained more traction as potential predictors of influenza like illness (ILI) onset. On a population level, weekly variations in wearable data were shown to correspond to ILI rates for the same population [[1](https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)]. Although largely correlational and lacking the individual level resolution that would deliver actionable predictions, this work demonstrates the potential of wearable data for influenza surveillance. Similar work focusing on individual level predictions for COVID-19 symptoms and COVID-19 related hospitalizations has leveraged neural networks to model wearable device data and demonstrated that heart rate, as well as respiration rate, as measured by Fitbit devices were elevated with disease onset[2]. Another very recent paper using wearable data for ILI symptom prediction, involving both influenza and COVID-19, employed both neural nets and traditional machine learning modeling but most importantly highlighted the importance of defining a realistic learning task and setting by demonstrating the difference in performance between retrospective and prospective training schemes [3].
+Data derived from wearable devices, especially markers such as heart rate, sleep status and step count, has recently gained more traction as potential predictors of influenza like illness (ILI) onset. On a population level, weekly variations in wearable data were shown to correspond to ILI rates for the same population [1]. Although largely correlational and lacking the individual level resolution that would deliver actionable predictions, this work demonstrates the potential of wearable data for influenza surveillance. Similar work focusing on individual level predictions for COVID-19 symptoms and COVID-19 related hospitalizations has leveraged neural networks to model wearable device data and demonstrated that heart rate, as well as respiration rate, as measured by Fitbit devices were elevated with disease onset[2]. Another very recent paper using wearable data for ILI symptom prediction, involving both influenza and COVID-19, employed both neural nets and traditional machine learning modeling but most importantly highlighted the importance of defining a realistic learning task and setting by demonstrating the difference in performance between retrospective and prospective training schemes [3].
 
 Inspired by such previous work, this project seeks to validate the usefulness of wearable data, as measured by the performance boost it provides for prediction of ILI related outcomes , while maintaining a realistic, and potentially deployable, modeling framework.
 
-## Approach
-
-How did you decide to solve the problem? What network architecture did you use? What data? Lots of details here about all the things you did. This section describes almost your whole project.
+## Methods
 
 ### Data
 
@@ -99,9 +97,10 @@ A prospective training scheme was used to train models under a more realistic fr
 - Observation Phase (training)
 - Deployment Phase (validation and testing)
 
-During the observation phase, which include all data for the first t weeks of the study period, the models were first trained on randomly cropped time windows, the aforementioned n day windows. Subsequently, the deployment phase includes all data beyond the first t weeks of the study period and models make daily predictions while progressing through this phase. In other words, the model first predicts a flu positivity on day d, then uses that day to train further before repeating the same procedure with day d+1 and so on, following a 'train and advance' approach. In this way, future data is never made available to the model similar to a realistic setting where a deployed model could only use previous days' data. The timeline used to split data set into observation and deployment, i.e. train, validation and test, is illustrated below:
+During the observation phase, which include all data for the first t weeks of the study period, the models were first trained on randomly cropped time windows, the aforementioned n day windows. Subsequently, the deployment phase includes all data beyond the first t weeks of the study period and models make daily predictions while progressing through this phase. In other words, the model first predicts a flu positivity on day d, then uses that day to train further before repeating the same procedure with day d+1 and so on, following a 'train and advance' approach. In this way, future data is never made available to the model similar to a realistic setting where a deployed model could only use previous days' data. Also, the first 2 weeks of the deployment phase were used for validation and hyper-parameter selection, whereas the rest was only used at test time. The timeline used to split data set into observation and deployment, i.e. train, validation and test, is illustrated below:
 
-figure here!!! mention that a portion of deployment was used as validation.
+figure here!!!
+
 
 ### Models
 
@@ -109,7 +108,7 @@ Three different modeling, of increasing complexity, were employed, here on refer
 
 Model 1 consists of a single machine learning classifier, namely an XGBoost, which predicts the label for a given time window. Baselines, survey data and activity data are all concatenated and subsequently passed to the model. Model 1 acts as a simple baseline which doesn't exploit the temporal relationship in the time series data.
 
-Model 2 consists of 2 neural networks serving as feature extractors for survey and activity data respectively, as well as an XGBoost end classifier. Instead of feeding the time series data straight to the end classifier, this approach focuses on learning neural representations from them, which would condense their predictive potential while exploiting the relationships among features. The proxy task used to learn representations of both survey and activity data is the main task itself, i.e. predicting the flu diagnosis at the end of a given time window. Feature extractors, one using only survey data and the other only activity data, are trained for this task and the output of the penultimate layer of these neural nets are passed on to the end classifier. Representations survey data, activity data and baselines are concatenated before being fed to the end classifier. Ultimately, the end classifier predicts the label of the given time window.
+Model 2 consists of 2 neural networks serving as feature extractors for survey and activity data respectively, as well as an XGBoost end classifier. Instead of feeding the time series data straight to the end classifier, this approach focuses on learning fixed length neural representations from them, which would condense their predictive potential while exploiting the relationships among features. The proxy task used to learn representations of both survey and activity data is the main task itself, i.e. predicting the flu diagnosis at the end of a given time window. Feature extractors, one using only survey data and the other only activity data, are trained for this task and the output of the penultimate layer of these neural nets are passed on to the end classifier. Representations survey data, activity data and baselines are concatenated before being fed to the end classifier. Ultimately, the end classifier predicts the label of the given time window.
 
 figure here
 
@@ -128,35 +127,49 @@ Below steps were taken to preprocess the data:
 - Data was standardized prior to training. Mean and variance parameters of the training data were used to scale validation and test data.
 - Principal Component Analysis (PCA) was applied to the baseline data where resulting features explained 0.95 of variance in the Data
 
-Window size (# of days) was treated as a hyper-parameter and a set of values [5, 10, 15, 20, 30] were experimented with. To tackle the class imbalance in the data set (flu positive time windows constituted less than 1% of the entire data set), class weights inversely related to class frequency were used during modeling, helping the model calculate a greater loss for misclassifications of the minority class. Architecture of the feature extractors was also treated as a hyper parameter (CNN vs LSTM). Learned representations were of fixed size 128 in both cases (the number was obtained with hyper-parameter search). Binary cross entropy was used as the loss function befitting binary classification and Adam was the optimizer of choice. ReLU activations were used with convolutional layers. For XGBoost, the number of estimators and maximum tree depth was found with hyper-parameter search and the results section only indicate the best performance obtained. Feature extractors were initially trained for 100 epochs with early stopping in case validation loss (0.15 of the training data was held out, not to be confused with deployment phase data) stopped increasing for a consecutive 5 epochs. A batch size of 32 was used. 
+Window size (# of days) was treated as a hyper-parameter and a set of values [5, 10, 15, 20, 30] were experimented with. To tackle the class imbalance in the data set (flu positive time windows constituted less than 1% of the entire data set), class weights inversely related to class frequency were used during modeling, driving the model to calculate a greater loss value for misclassifications of the minority class. Architecture of the feature extractors was also treated as a hyper parameter (CNN vs LSTM). Learned representations were of fixed size 128 in both cases (the number was obtained with hyper-parameter search).
+
+Binary cross entropy was used as the loss function befitting binary classification and Adam was the optimizer of choice. ReLU activations were used with convolutional layers. For XGBoost, the number of estimators and maximum tree depth was found with hyper-parameter search and the results section only indicate the best performance obtained. Feature extractors were initially trained with early stopping in case validation loss (0.15 of the training data was held out, not to be confused with deployment phase data) stopped increasing for a consecutive 5 epochs. A batch size of 32 was used.
 
 ## Results
 
-Results for different models can be found below (window size = 15):
+Results for different models can be found below (window size = 15, positive class is flu diagnosis):
 
 |Model name|AUC|Precision|Recall|F-1 Score|
 |---|---|---|---|---|
-|Model 1 (XGBoost)|0.39|5.7|0.45|0.16|
-|Model 2 (w/ CNN)|0.39|5.7|0.45|0.16|
-|Model 2 (w/ LSTM)|0.30|10.1|0.52|0.10|
-|Model 3 (w/ CNN)|0.32|7.2|0.60|0.20|
-|Model 3 (w/ LSTM)|0.31|5.9|0.58|0.17
+|Model 1 (XGBoost)|0.729|0.317|0.425|0.363|
+|Model 2 (w/ CNN)|0.883|0.379|0.501|0.431|
+|Model 2 (w/ LSTM)|0.902|0.406|0.526|0.458|
+|Model 3 (w/ CNN)|0.939|0.441|0.553|0.491|
+|Model 3 (w/ LSTM)|0.953|0.462|0.579|0.513
 
 As seen above, model 3 which leverages both representation learning and end-to-end training performs the best among all three. Model 2 also seems to be better than model 1, highlighting the advantage of exploiting the temporal dependencies in the data, in addition to demonstrating the superiority of neural networks compared to traditional machine learning approaches for the task at hand. LSTM emerges as the marginally better performer for both model 2 and 3 in the face of CNN.
 
 Results for different input data can be found below (model 3 with LSTM was used in all instances):
 
+|Input data|AUC|Precision|Recall|F-1 Score|
+|---|---|---|---|---|
+|Baselines+Survey|0.875|0.368|0.492|0.421|
+|Baselines+Survey+Activity|0.953|0.462|0.579|0.513|
 
 Addressing the question regarding usefulness of wearable data raised earlier, these results attest that predictive performance improves considerably when model uses not only baselines and survey data but also activity data, as reaffirming the claims of previous relevant work.
 
 Results for experiments with different window sizes can be found below (model 3 with LSTM was used in all instances):
+
+|Window size (# of days)|AUC|Precision|Recall|F-1 Score|
+|---|---|---|---|---|
+|5|0.857|0.358|0.471|0.407|
+|10|0.932|0.436|0.548|0.486||
+|15|0.953|0.462|0.579|0.513|
+|20|0.894|0.403|0.509|0.449|
+|30|0.808|0.342|0.459|0.391
 
 A window size of 15 seems to be the happy optimal, where performance degrades with increasing window sizes
 
 
 ## Discussion
 
-The project essentially accomplishes what it has set out to do, mainly achieving superior performance compared to non-neural baselines and demonstrating the usefulness of wearable data, but there's certainly a lot of room for improvement. The immense class imbalance in the data has been a formidable challenge and methods other than class weighting can be employed to alleviate it. Also, a better understanding of the precision/recall trade-off, made more pressing by the imbalance, is necessary as medical applications are usually more sensitive to model behavior in that regard (e.g. higher recall for flu positivity might be desired at the expense of lower precision). 
+The project essentially accomplishes what it has set out to do, mainly achieving superior performance compared to non-neural baselines and demonstrating the usefulness of wearable data, but there's certainly a lot of room for improvement. The immense class imbalance in the data has been a formidable challenge and methods other than class weighting can be employed to alleviate it. Also, a better understanding of the precision/recall trade-off, made more pressing by the imbalance, is necessary as medical applications are usually more sensitive to model behavior in that regard (e.g. higher recall for flu positivity might be desired at the expense of lower precision).
 
 On the other hand, formulating a better proxy task with which feature extractors would trained makes for important future work. The main task itself passes as an acceptable proxy task but interactions between different features remain unexploited. Using what is called a self-supervised training scheme, some inherent relations within features can be used in the absence of labels. For example, recent work has used the self-supervised task of predicting heart rate from step counts to learn representations of activity data, which day later use predict different outcomes [4]. A similar, or even more creative, proxy task could enrich the learned neural representations for the main task of flu prediction.
 
