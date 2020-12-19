@@ -45,7 +45,7 @@ Accordingly, this project was motivated by the task of making daily predictions 
 
 ## Related Work
 
-Data derived from wearable devices, especially markers such as heart rate, sleep status and step count, has recently gained more traction as potential predictors of influenza like illness (ILI) onset. On a population level, weekly variations in wearable data were shown to correspond to ILI rates for the same population [[1(https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)]]. Although largely correlational and lacking the individual level resolution that would deliver actionable predictions, this work demonstrates the potential of wearable data for influenza surveillance. Similar work focusing on individual level predictions for COVID-19 symptoms and COVID-19 related hospitalizations has leveraged neural networks to model wearable device data and demonstrated that heart rate, as well as respiration rate, as measured by Fitbit devices were elevated with disease onset[[2(https://www.nature.com/articles/s41746-020-00363-7)]]. Another very recent paper using wearable data for ILI symptom prediction, involving both influenza and COVID-19, employed both neural nets and traditional machine learning modeling but most importantly highlighted the importance of defining a realistic learning task and setting by demonstrating the difference in performance between retrospective and prospective training schemes [3].
+Data derived from wearable devices, especially markers such as heart rate, sleep status and step count, has recently gained more traction as potential predictors of influenza like illness (ILI) onset. On a population level, weekly variations in wearable data were shown to correspond to ILI rates for the same population [[1](https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)]. Although largely correlational and lacking the individual level resolution that would deliver actionable predictions, this work demonstrates the potential of wearable data for influenza surveillance. Similar work focusing on individual level predictions for COVID-19 symptoms and COVID-19 related hospitalizations has leveraged neural networks to model wearable device data and demonstrated that heart rate, as well as respiration rate, as measured by Fitbit devices were elevated with disease onset[[2](https://www.nature.com/articles/s41746-020-00363-7)]. Another very recent paper using wearable data for ILI symptom prediction, involving both influenza and COVID-19, employed both neural nets and traditional machine learning modeling but most importantly highlighted the importance of defining a realistic learning task and setting by demonstrating the difference in performance between retrospective and prospective training schemes [3].
 
 Inspired by such previous work, this project seeks to validate the usefulness of wearable data, as measured by the performance boost it provides for prediction of ILI related outcomes , while maintaining a realistic, and potentially deployable, modeling framework.
 
@@ -173,9 +173,9 @@ On the other hand, formulating a better proxy task with which feature extractors
 
 ## References
 
-[[1(https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)]] 
+[[1](https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)] 
 
-[[2(https://www.nature.com/articles/s41746-020-00363-7)]]
+[[2](https://www.nature.com/articles/s41746-020-00363-7)]
 
 [3]
 
