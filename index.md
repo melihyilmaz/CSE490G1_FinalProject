@@ -30,12 +30,15 @@ Syntax highlighted code block
 
 **Absract:** Write a 3-4 sentence abstract. It should introduce the problem and your approach. You may also want some numbers like 35 mAP and 78% accuracy. You can use this example README for your project, you can use a different ordering for your website, or you can make a totally different website altogether!
 
-VIDEO GOES HERE 
+[PROJECT VIDEO](https://drive.google.com/drive/folders/1peh_0dNibL9ziWJkzX4oK5BzMr4GiCE8?usp=sharing)
 
-
-
-
-
+## Table of Contents
+- [Introduction](#introduction)
+- [Related Work](#related-work)
+- [Methods](#methods)
+- [Results](#results)
+- [Discussion](#discussion)
+- [References](#references)
 
 ## Introduction
 
