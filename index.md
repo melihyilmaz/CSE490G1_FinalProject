@@ -132,9 +132,26 @@ Window size (# of days) was treated as a hyper-parameter and a set of values [5,
 
 ## Results
 
-How did you evaluate your approach? How well did you do? What are you comparing to? Maybe you want ablation studies or comparisons of different methods.
+Results for different models can be found below (window size = 15):
 
-You may want some qualitative results and quantitative results. Example images/text/whatever are good. Charts are also good. Maybe loss curves or AUC charts. Whatever makes sense for your evaluation.
+|Model name|AUC|Precision|Recall|F-1 Score|
+|Model 1 (XGBoost)|0.39|5.7|0.45|0.16|
+|Model 2 (w/ CNN)|0.39|5.7|0.45|0.16|
+|Model 2 (w/ LSTM)|0.30|10.1|0.52|0.10|
+|Model 3 (w/ CNN)|0.32|7.2|0.60|0.20|
+|Model 3 (w/ LSTM)|0.31|5.9|0.58|0.17
+
+As seen above, model 3 which leverages both representation learning and end-to-end training performs the best among all three. Model 2 also seems to be better than model 1, highlighting the advantage of exploiting the temporal dependencies in the data, in addition to demonstrating the superiority of neural networks compared to traditional machine learning approaches for the task at hand. LSTM emerges as the marginally better performer for both model 2 and 3 in the face of CNN.
+
+Results for different input data can be found below (model 3 with LSTM was used in all instances):
+
+
+Addressing the question regarding usefulness of wearable data raised earlier, these results attest that predictive performance improves considerably when model uses not only baselines and survey data but also activity data, as reaffirming the claims of previous relevant work.
+
+Results for experiments with different window sizes can be found below (model 3 with LSTM was used in all instances):
+
+A window size of 15 seems to be the happy optimal, where performance degrades with increasing window sizes
+
 
 ## Discussion
 
