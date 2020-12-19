@@ -148,10 +148,10 @@ On the other hand, formulating a better proxy task with which feature extractors
 
 ## References
 
-[[1](https://www.thelancet.com/journals/landig/article/PIIS2589-7500(19)30222-5/fulltext)] 
+[1] Jennifer M Radin,Nathan E Wineinger,Eric J Topol,Steven R Steinhubl.Harnessing wearable device data to improve state-level real-time surveillance of influenza-like illness in the USA: a population-based study. In __The Lancet Digital Health__, 2020.
 
-[[2](https://www.nature.com/articles/s41746-020-00363-7)]
+[2] Natarajan, A., Su, HW. & Heneghan, C. Assessment of physiological signs associated with COVID-19 measured using wearable devices. In __npj Digital Medicine __ 3, 156, 2020. 
 
-[[3](https://drive.google.com/file/d/1SEvMyBovlbPTVpPx-BZlRf3sUoQ9oKW1/view)]
+[[3]] Nestor, Brest et al., Using Wearables for Influenza-Like Illness Detection: The importance of design. In  __Machine Learning for Mobile Health Workshop at NeurIPS__ ,2020.
 
-[[4](https://arxiv.org/pdf/2011.04601.pdf)]
+[4] Spathis, D., Perez-Pozuelo, I., Brage, S., Wareham, N., & Mascolo, C. . Learning Generalizable Physiological Representations from Large-scale Wearable Data. In  __Machine Learning for Mobile Health Workshop at NeurIPS__ ,2020.
