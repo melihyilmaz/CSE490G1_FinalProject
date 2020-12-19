@@ -135,6 +135,7 @@ Window size (# of days) was treated as a hyper-parameter and a set of values [5,
 Results for different models can be found below (window size = 15):
 
 |Model name|AUC|Precision|Recall|F-1 Score|
+|---|---|---|---|---|
 |Model 1 (XGBoost)|0.39|5.7|0.45|0.16|
 |Model 2 (w/ CNN)|0.39|5.7|0.45|0.16|
 |Model 2 (w/ LSTM)|0.30|10.1|0.52|0.10|
